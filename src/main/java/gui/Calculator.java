@@ -160,7 +160,7 @@ public class Calculator extends VBox implements EventHandler<ActionEvent>{
 		else if (value.equals("=") && number1 != "" && number2 != ""){
 
 			int num1 = Integer.parseInt(number1);
-    		int num2 = Integer.parseInt(number2);
+    			int num2 = Integer.parseInt(number2);
 			
 			if (operator.equals("+")){	
 				int suma = num1 + num2;
