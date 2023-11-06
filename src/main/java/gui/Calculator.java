@@ -13,7 +13,6 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
 public class Calculator extends VBox implements EventHandler<ActionEvent>{
-	
 	String number1 = "";
 	String number2 = "";
 	String operator;
@@ -124,15 +123,71 @@ public class Calculator extends VBox implements EventHandler<ActionEvent>{
 
 	@Override
 	public void handle(ActionEvent event) {
-		
+
 		Button b = (Button) event.getSource();
 		String value = b.getText();
 		
-		//
-		//***
-		//***	
+		if (value.equals("C")){
+			operator = null;
+			number1 = ""; 
+			number2 = "";
+			displayText.setText("");
+		}
+		else if (value.matches("[0-9]") && operator == null){
+			number1 += value;
+			displayText.setText(number1);
+		}
+		else if (value.matches("[0-9]") && operator != null){
+			number2 += value;
+			displayText.setText(number1 + operator + number2);
+		}
+		else if (value.equals("+")){
+			operator = value;
+			displayText.setText(number1 + "+");
+		}
+		else if (value.equals("-")){
+			operator = value;
+			displayText.setText(number1 + "-");
+		}
+		else if (value.equals("*")){
+			operator = value;
+			displayText.setText(number1 + "*");
+		}
+		else if (value.equals("/")){
+			operator = value;
+			displayText.setText(number1 + "/");
+		}
+		else if (value.equals("=") && number1 != "" && number2 != ""){
+
+			int num1 = Integer.parseInt(number1);
+    		int num2 = Integer.parseInt(number2);
+			
+			if (operator.equals("+")){	
+				int suma = num1 + num2;
+				displayText.setText(Integer.toString(suma));	
+			}
+			if (operator.equals("-")){
+				int resta = num1 - num2;
+				displayText.setText(Integer.toString(resta));	
+			}
+
+			if (operator.equals("*")){
+				int multiplicacion =  num1 * num2;
+				displayText.setText(Integer.toString(multiplicacion));	
+			}
+
+			if (operator.equals("/")){
+				if (num2 != 0) {
+					int division =  num1 / num2;
+					displayText.setText(Integer.toString(division));	
+				} else {	
+					displayText.setText("Division no valida"); // Manejar división por cero	
+				}
+			}	
+		}
+		else{
+			displayText.setText("operador no conocido");
+		}
+		
 	}
-
-	
-
 }
